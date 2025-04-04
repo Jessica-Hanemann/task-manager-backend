@@ -1,18 +1,14 @@
 const express = require("express");
+
+const TaskController = require("../controllers/task.controller");
 const TaskModel = require("../models/task.model");
 const router = express.Router();
 
 //listar
 //como colocamos o /tasks no index aqui podemos tirar e deixar a /
+//a função foi para o controler
 router.get("/", async (req, res) => {
-    // procura o registro com determinada condição
-    // pra pegar tudo deixar o objeto vazio
-    try {
-        const tasks = await TaskModel.find({});
-        res.status(200).send(tasks);
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
+    return new TaskController(req, res).getTasks();
 });
 
 //encontrar
