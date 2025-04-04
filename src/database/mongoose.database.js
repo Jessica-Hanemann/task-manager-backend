@@ -7,7 +7,7 @@ const connectToDataBase = async () => {
         ),
             console.log("MongoDB conectado");
     } catch (error) {
-        console.error("erro ao conectar");
+        console.error("Erro ao conectar");
     }
 };
 
