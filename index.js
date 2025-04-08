@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const cors = require("cors");
 //passamos todas as rotas pra outro arquivo então puxamos aqui
 const TaskRouter = require("./src/routes/task.routes");
 
@@ -10,6 +11,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 connectToDataBase();
+app.use(cors());
 
 //e vamos chamar as rotas todas as vezes que tiver /tasks
 app.use("/tasks", TaskRouter);
