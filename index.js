@@ -14,4 +14,6 @@ connectToDataBase();
 //e vamos chamar as rotas todas as vezes que tiver /tasks
 app.use("/tasks", TaskRouter);
 
-app.listen(8000, () => console.log("escutando porta 8000"));
+// app.listen(8000, () => console.log("escutando porta 8000"));
+const port = process.env.PORT || 8000;
+app.listen(port, () => console.log(`escutando porta ${port}`));
