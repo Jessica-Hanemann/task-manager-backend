@@ -1,6 +1,7 @@
 // import TaskModel from "../models/task.model";
 const TaskModel = require("../models/task.model");
 const { notFoundError } = require("../errors/mongodb.errors");
+const { notAllowedFieldsToUpdateError } = require("../errors/general.errors");
 
 class TaskController {
     constructor(req, res) {
@@ -59,7 +60,7 @@ class TaskController {
                 return notFoundError(this.res);
             }
             //mapeou campos que podem atualizar
-            const allowedUpdates = ["isCompleted", "description", "usuario"];
+            const allowedUpdates = ["isCompleted", "description"];
             //pegou campos que o usuario ta tentatndo  - recebendo no body
             const requestedUpdates = Object.keys(taskData);
             // pra cada campo recebido no body, verifica se a lista de campos permitidos inclui esse campo, se incluir ele pode ser atualizado
@@ -67,9 +68,7 @@ class TaskController {
                 if (allowedUpdates.includes(update)) {
                     taskToUpdate[update] = taskData[update];
                 } else {
-                    return this.res
-                        .status(500)
-                        .send("Um ou mais campos não são editáveis");
+                    return notAllowedFieldsToUpdateError(this.res);
                 }
             }
 
