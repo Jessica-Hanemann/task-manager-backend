@@ -9,16 +9,13 @@ const connectToDataBase = require("./src/database/mongoose.database");
 dotenv.config();
 
 const app = express();
-app.use(express.json());
-connectToDataBase();
-app.use(cors());
+app.use(express.json()); //fala pro express que vamos receber json nas requisições, já converte o json para objeto javascript automaticamente
+connectToDataBase(); //Função executada quando iniciar o servidor
+app.use(cors()); //permite conexão de outros locais (necessário para integrar com o front-end)
 
 //e vamos chamar as rotas todas as vezes que tiver /tasks
 app.use("/tasks", TaskRouter);
 
-// app.listen(8000, () => console.log("escutando porta 8000"));
-// const port = process.env.PORT || 8000;
-// app.listen(port, () => console.log(`escutando porta ${port}`));
+//alteração pra escutar tanto a porta localhost quanto a do render
 const port = process.env.PORT || 8000;
-
 app.listen(port, () => console.log(`Escutando porta ${port}!`));
