@@ -4,6 +4,12 @@ const cors = require("cors");
 //passamos todas as rotas pra outro arquivo então puxamos aqui
 const TaskRouter = require("./src/routes/task.routes");
 
+const authRoutes = require("./src/routers/auth.routers");
+const taskRoutes = require("./src/routers/task.routers");
+
+app.use("/api/auth", authRoutes);
+app.use("/api/tasks", taskRoutes);
+
 const connectToDataBase = require("./src/database/mongoose.database");
 
 dotenv.config();

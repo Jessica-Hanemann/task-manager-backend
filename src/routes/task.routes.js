@@ -3,6 +3,8 @@ const express = require("express");
 const TaskController = require("../controllers/task.controller");
 const router = express.Router();
 
+const auth = require("../middleware/auth");
+router.use(auth); // protege todas as rotas abaixo
 //listar
 //como colocamos o /tasks no index aqui podemos tirar e deixar a /
 //a função foi para o controler
